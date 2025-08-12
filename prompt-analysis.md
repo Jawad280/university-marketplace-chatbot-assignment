@@ -1,45 +1,7 @@
 ## PROMPT ANALYSIS
 
-Common Best practices for prompt engineering :
+The core principle behind this prompt design is clarity and directness. Wherever possible, I use strong, unambiguous terms such as “NEVER” and “DO NOT” to set firm behavioral boundaries for the model. The <instructions> tag forms the backbone of the operational flow — starting with the most important checks, followed by supporting details. This sequential order ensures the assistant can handle requests consistently and within policy. I also clearly define the assistant’s role, tone, and scope of engagement so it knows how to interact with users, avoid undesired topics, and remain professional and empathetic. To support decision-making, I’ve included a <thinking> section, which acts as a chain-of-thought scaffold, helping us trace and adjust the model’s reasoning process to match desired behavior.
 
-1. Clear & Direct
-    - Contextual information is key -> what the results will be used for, what the output is meant for, workflow, end goal
-    - Specificity -> ONLY & NOTHING ELSE
-    - Sequential instructions
+To strengthen contextual accuracy, I use multi-shot examples in <example_behavior>. These cover a variety of scenarios — from simple scope refusals to dispute handling and urgent distress — allowing the model to draw on concrete references when generating responses. The structure relies heavily on hierarchical XML tagging, which keeps the prompt modular and easy to maintain. For example, marketplace features are encapsulated in <buyer> and <seller> tags, while policies and safety measures are kept in <regulations> and <safety> tags. This separation means any single component can be updated without rewriting the entire system prompt.
 
-2. Multishot (use examples)
-    - `<example>` tags can be used to provide 2/3 shots of examples
-    - Relevant examples + Diverse -> edge case covering etc
-
-3. Chain of Thought 
-    - `<thinking>` tags can be used 
-    - Allow the thinking to take place for more complex or rigid situations to enforce a certain rule
-    - Go through a series of thought process checks before passing out information
-    - Mimic an actual assistant/moderator
-
-4. XML tags
-    - Structured prompting -> `<instructions>, <example>, <formatting>, <thinking>`
-    - Use nested tags for hierarchical content
-    - Formatting a consistent response style
-
-5. Role & System prompts
-    - Role prompting improves accuracy and the tone of the chatbot
-    - Defining its role can allow more focus on the regulations it is bounded by
-
-6. Prefill responses
-    - Provide a desired initial text for the chatbot to begin with 
-    - Depends on scenarios
-
-7. Long Context tips
-    - `<document>` & `<source>` tags to wrap documents in the prompt which have larger context
-    ```xml
-    <documents>
-        <document index="1">
-            <source>user_sent_image.jpg</source>
-            <document_content>
-                {{USER_SENT_IMAGE}}
-            </document_content>
-        </document>
-    </documents>
-    ```
-8. Chain complex prompts
+Finally, I’ve integrated two essential tool calls — handover_toolcall() for escalating urgent or complex cases to a human moderator, and send_violation_toolcall() for policy violations. These make the assistant more autonomous while still maintaining compliance and safety. Together, the structure, clear instructions, example-driven guidance, and integrated tooling create a well-defined, adaptable, and safe conversational framework for the ABC University Marketplace Support Assistant.
