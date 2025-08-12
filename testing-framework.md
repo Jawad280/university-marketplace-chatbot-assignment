@@ -43,11 +43,11 @@ Check if the chatbot is able to detect and, most importantly, react to violation
 Since the chatbot responses are inherently non-deterministic and can vary in wording, expecting an exact answer match is neither practical nor efficient. Therefore, my approach to validation will focus on verifying that the key expected elements are present in the response and that the overall success criteria for each test case are fulfilled.
 
 To achieve this, I plan to implement or leverage a secondary evaluation agent—such as another large language model configured with a carefully crafted system prompt—that will:
-    - Analyze each chatbot response to identify the presence of all the expected elements specified in the test case.
+- Analyze each chatbot response to identify the presence of all the expected elements specified in the test case.
 
-    - Evaluate whether the response meets the success criteria, ensuring that the chatbot’s answer is sufficiently accurate, complete, and aligned with policy guidelines.
+- Evaluate whether the response meets the success criteria, ensuring that the chatbot’s answer is sufficiently accurate, complete, and aligned with policy guidelines.
 
-    - Provide a granular score expressed as a percentage, calculated by the ratio of correctly included expected elements to the total number of expected elements for that test. This quantifiable measure will help track chatbot performance consistently over time.
+- Provide a granular score expressed as a percentage, calculated by the ratio of correctly included expected elements to the total number of expected elements for that test. This quantifiable measure will help track chatbot performance consistently over time.
 
 This method allows for flexible yet robust assessment, accommodating natural language variability while maintaining high standards for accuracy and safety.
 
